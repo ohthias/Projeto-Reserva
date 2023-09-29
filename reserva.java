@@ -5,14 +5,13 @@
  * @since 1.0
  */
 
-package Airplane;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-public class reserva {
+public class Reserva {
     private String nomePassageiro;
     private String destino;
     private String hora;
@@ -30,7 +29,7 @@ public class reserva {
     Random idHora = new Random();
     int horaRandom = idHora.nextInt(24);
 
-    public reserva(String nomePassageiro, String destino, String hora, String data) {
+    public Reserva(String nomePassageiro, String destino, String hora, String data) {
         setNomePassageiro(nomePassageiro);
         setDestino(destino);
         setHora(hora);
