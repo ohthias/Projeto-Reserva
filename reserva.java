@@ -1,3 +1,10 @@
+/**
+ * @Authors Matheus Gabriel
+ *          Emilly Dantas
+ *          Gabrielly de Moraes
+ * @since 1.0
+ */
+
 package Airplane;
 
 import java.util.ArrayList;
@@ -71,7 +78,7 @@ public class reserva {
         do {
             menuExibir();
             int opcMenu = sc.nextInt();
-            System.out.println("Carregando...");
+            System.out.println("Carregando...\n");
 
             try {
                 Thread.sleep(1000);
@@ -89,7 +96,7 @@ public class reserva {
                     break;
 
                 case 3:
-                    System.out.println("Obrigado por comprar conosco");
+                    System.out.println("Obrigado por comprar conosco\n");
                     continuar = false;
                     break;
 
@@ -129,6 +136,13 @@ public class reserva {
         int respostaCompra = sc.nextInt();
 
         if (respostaCompra == 1) {
+            System.out.println("Carregando... \n");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                System.out.println(e);
+            }
+
             System.out.println("Digite seu nome do passageiro: ");
             String nome = sc.next();
             setNomePassageiro(nome);
@@ -136,6 +150,14 @@ public class reserva {
             System.out.println("Digite seu destino: ");
             String destino = sc.next();
             setDestino(destino);
+
+            System.out.println("Aguarde...");
+
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException e) {
+                System.out.println(e);
+            }
 
             String newData = (((dataRandom + 1 < 10) ? "0" + (dataRandom + 1) : (dataRandom + 1)) + "/"
                     + ((dataRandom < 10) ? "0" + (dataRandom) : (dataRandom)) + "/2024");
@@ -156,6 +178,7 @@ public class reserva {
 
             exibirInformacoes();
         } else if (respostaCompra == 2) {
+            System.out.println("Carregando... \n");
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -192,9 +215,17 @@ public class reserva {
 
     // Informações de compra de passagem
     public void infoCompraPassagem() {
-        System.out.println("Digite Seu Nome: ");
+        System.out.println("Digite o nome do passageiro: ");
         String nome = sc.next();
         setNomePassageiro(nome);
+
+        System.out.println("Aguarde...");
+
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
 
         String newData = (((dataRandom + 1 < 10) ? "0" + (dataRandom + 1) : (dataRandom + 1)) + "/"
                 + ((dataRandom < 10) ? "0" + (dataRandom) : (dataRandom)) + "/2024");
