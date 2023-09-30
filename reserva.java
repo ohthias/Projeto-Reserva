@@ -18,8 +18,11 @@ public class Reserva {
     private String data;
 
     Random idReserva = new Random();
-    int reserva = idReserva.nextInt(9999);
+    int reserva = idReserva.nextInt(9000) + 1000;
     Scanner sc = new Scanner(System.in);
+
+    Random aeroportoRandom = new Random();
+    int aeroportoSorteado = aeroportoRandom.nextInt(3);
 
     Random idData = new Random();
     int dataRandom = idData.nextInt(12);
@@ -190,7 +193,24 @@ public class Reserva {
         int respostaCompra = sc.nextInt();
 
         if (respostaCompra == 1) {
-            infoCompraPassagem();
+            System.out.println("Qual o destino em mente?");
+            String destino = sc.next();
+
+            if (aeroportoSorteado == 1 || aeroportoSorteado == 0) {
+                String destinoSintaxe = ("GRU -> " + destino);
+                setDestino(destinoSintaxe);
+                infoCompraPassagem();
+            } else if (aeroportoSorteado == 2) {
+                String destinoSintaxe = ("CON -> " + destino);
+                setDestino(destinoSintaxe);
+                infoCompraPassagem();
+            } else if (aeroportoSorteado == 3) {
+                String destinoSintaxe = ("CAM -> " + destino);
+                setDestino(destinoSintaxe);
+                infoCompraPassagem();
+            } else {
+                infoCompraPassagem();
+            }
         } else if (respostaCompra == 2) {
             carregando(1000);
             exbirMenuAeroportos();
