@@ -148,6 +148,8 @@ public class Reserva {
             escolhaAeroporto = "Campinas";
             carregando(1000);
             aeroporto(escolhaAeroporto, "CAM");
+        } else {
+            System.out.println("Aeroporto não informado. Encerrando processo de compra.");
         }
     }
 
@@ -217,7 +219,7 @@ public class Reserva {
                 setDestino(destinoSintaxe);
                 infoCompraPassagem();
             } else {
-                infoCompraPassagem();
+                System.out.println("Destino não informado. Encerrando processo de compra.");
             }
         } else if (respostaCompra == 2) {
             carregando(1000);
