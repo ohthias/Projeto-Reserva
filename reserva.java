@@ -1,10 +1,10 @@
+
 /**
  * @Authors Matheus Gabriel
  *          Emilly Dantas
  *          Gabrielly de Moraes
  * @since 1.0
  */
-
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,9 +16,6 @@ public class Reserva {
     private String destino;
     private String hora;
     private String data;
-
-    String[] voosGru = { "GRU -> Penha/SC", "GRU -> Fortaleza", "GRU -> RJ", "GRU -> Gramado" };
-    ArrayList<String> vooGru = new ArrayList<String>(Arrays.asList(voosGru));
 
     Random idReserva = new Random();
     int reserva = idReserva.nextInt(9999);
@@ -44,6 +41,15 @@ public class Reserva {
         }
     }
 
+    public void carregando(int time) {
+        System.out.println("Carregando... \n");
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            System.out.println(e);
+        }
+    }
+
     // Login
     public boolean loginUsuario() {
         System.out.print("=== Seja bem-vindo ao Reserva de Voos ===\n" +
@@ -52,13 +58,8 @@ public class Reserva {
         System.out.println("- Digite sua senha: ");
         double senhaUsuario = sc.nextDouble();
 
-        System.out.println("Seja bem vindo " + nomeUsuario +
-                "\n Aguarde... \n");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            System.out.println(e);
-        }
+        System.out.println("Seja bem vindo " + nomeUsuario);
+        carregando(1000);
 
         return true;
     }
@@ -71,19 +72,22 @@ public class Reserva {
                 "\r 3) Sair \n");
     }
 
+    // Menu Aeroportos
+    public void exbirMenuAeroportos() {
+        System.out.println("\t === AEROPORTOS ===\n" +
+                "\r 1) Guarulhos \n" +
+                "\r 2) Congonhas \n" +
+                "\r 3) Campinas \n");
+
+    }
+
     // Menu principal
     public void menu() {
         boolean continuar = true;
         do {
             menuExibir();
             int opcMenu = sc.nextInt();
-            System.out.println("Carregando...\n");
-
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                System.out.println(e);
-            }
+            carregando(1000);
 
             switch (opcMenu) {
                 case 1:
@@ -126,6 +130,57 @@ public class Reserva {
         }
     }
 
+    // Escolha de aeroporto
+    public void exibirAeroportos(int opcAeroporto) {
+        String escolhaAeroporto = " ";
+        if (opcAeroporto == 1) {
+            escolhaAeroporto = "Guarulhos";
+            carregando(1000);
+            aeroporto(escolhaAeroporto, "GRU");
+        } else if (opcAeroporto == 2) {
+            escolhaAeroporto = "Congonhas";
+            carregando(1000);
+            aeroporto(escolhaAeroporto, "CON");
+        } else if (opcAeroporto == 3) {
+            escolhaAeroporto = "Campinas";
+            carregando(1000);
+            aeroporto(escolhaAeroporto, "CAM");
+        }
+    }
+
+    public void aeroporto(String escolhido, String sigla) {
+        String[] voos = { sigla + "-> Penha/SC", sigla + "-> Fortaleza", sigla + "-> RJ", sigla + "-> Gramado" };
+        ArrayList<String> vooReserva = new ArrayList<String>(Arrays.asList(voos));
+
+        System.out.println("Temos a seguinte opções para o aeroporto de " + escolhido);
+        for (int i = 0; i < vooReserva.size(); i++) {
+            System.out.println((i + 1) + ") " + vooReserva.get(i));
+        }
+
+        System.out.println("\nDigite o voo escolhido");
+        int escVoo = sc.nextInt();
+
+        if (escVoo == 1) {
+            setDestino(sigla + "-> Penha/SC");
+            carregando(500);
+            infoCompraPassagem();
+        } else if (escVoo == 2) {
+            setDestino(sigla + "-> Fortaleza");
+            carregando(500);
+            infoCompraPassagem();
+        } else if (escVoo == 3) {
+            setDestino(sigla + "-> RJ");
+            carregando(500);
+            infoCompraPassagem();
+        } else if (escVoo == 4) {
+            setDestino(sigla + "-> Gramado");
+            carregando(500);
+            infoCompraPassagem();
+        } else {
+            System.out.println("Destino não informado. Encerrando processo de compra.");
+        }
+    }
+
     // Comprar Passagem
     public void comprarPassagem() {
         System.out.println("Comprando passagem... \n"
@@ -135,78 +190,13 @@ public class Reserva {
         int respostaCompra = sc.nextInt();
 
         if (respostaCompra == 1) {
-            System.out.println("Carregando... \n");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                System.out.println(e);
-            }
-
-            System.out.println("Digite seu nome do passageiro: ");
-            String nome = sc.next();
-            setNomePassageiro(nome);
-
-            System.out.println("Digite seu destino: ");
-            String destino = sc.next();
-            setDestino(destino);
-
-            System.out.println("Aguarde...");
-
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                System.out.println(e);
-            }
-
-            String newData = (((dataRandom + 1 < 10) ? "0" + (dataRandom + 1) : (dataRandom + 1)) + "/"
-                    + ((dataRandom < 10) ? "0" + (dataRandom) : (dataRandom)) + "/2024");
-
-            String newHorario = (((horaRandom + 1 < 10) ? "0" + (horaRandom + 1) : (horaRandom + 1)) + ":"
-                    + ((horaRandom < 10) ? "0" + horaRandom : horaRandom));
-            System.out.println("A data de sua viagem é " + newData + " às " + newHorario);
-            setData(newData);
-            setHora(newHorario);
-
-            System.out.println("Aguarde...");
-
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                System.out.println(e);
-            }
-
-            exibirInformacoes();
+            infoCompraPassagem();
         } else if (respostaCompra == 2) {
-            System.out.println("Carregando... \n");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                System.out.println(e);
-            }
-
-            System.out.println("Temos a seguinte opções para o aeroporto de Guarulhos");
-            for (int i = 0; i < vooGru.size(); i++) {
-                System.out.println((i + 1) + ") " + vooGru.get(i));
-            }
-
-            System.out.println("\nDigite o voo escolhido");
-            int escVoo = sc.nextInt();
-
-            if (escVoo == 1) {
-                setDestino("GRU -> Penha/SC");
-                infoCompraPassagem();
-            } else if (escVoo == 2) {
-                setDestino("GRU -> Fortaleza");
-                infoCompraPassagem();
-            } else if (escVoo == 3) {
-                setDestino("GRU -> RJ");
-                infoCompraPassagem();
-            } else if (escVoo == 4) {
-                setDestino("GRU -> Gramado");
-                infoCompraPassagem();
-            } else {
-                System.out.println("Destino não informado. Encerrando processo de compra.");
-            }
+            carregando(1000);
+            exbirMenuAeroportos();
+            System.out.println("Escolha um aeroporto: ");
+            int opcAeroporto = sc.nextInt();
+            exibirAeroportos(opcAeroporto);
         } else {
             System.out.println("Destino não informado. Encerrando processo de compra.");
         }
@@ -217,14 +207,7 @@ public class Reserva {
         System.out.println("Digite o nome do passageiro: ");
         String nome = sc.next();
         setNomePassageiro(nome);
-
-        System.out.println("Aguarde...");
-
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            System.out.println(e);
-        }
+        carregando(1500);
 
         String newData = (((dataRandom + 1 < 10) ? "0" + (dataRandom + 1) : (dataRandom + 1)) + "/"
                 + ((dataRandom < 10) ? "0" + (dataRandom) : (dataRandom)) + "/2024");
@@ -234,22 +217,9 @@ public class Reserva {
         System.out.println("A data de sua viagem é " + newData + " às " + newHorario);
         setData(newData);
         setHora(newHorario);
-
-        System.out.println("Aguarde...");
-
-        try {
-            Thread.sleep(1500);
-        } catch (InterruptedException e) {
-            System.out.println(e);
-        }
-
+        carregando(1500);
         exibirInformacoes();
-
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            System.out.println(e);
-        }
+        carregando(1500);
 
     }
 
