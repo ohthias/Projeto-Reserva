@@ -53,11 +53,17 @@ public class Reserva {
         String nomeUsuario = sc.nextLine();
         System.out.println("- Digite sua senha: ");
         double senhaUsuario = sc.nextDouble();
+        String senhaUsuarioValidação = String.valueOf(senhaUsuario);
 
-        System.out.println("Seja bem vindo " + nomeUsuario);
-        carregando(1000);
+        if(nomeUsuario == null || senhaUsuarioValidação == null) {
+            return false;
+        } else {
+            System.out.println("Seja bem vindo " + nomeUsuario);
+            carregando(1000);
+    
+            return true;
+        }
 
-        return true;
     }
 
     /* Método de exibição do menu principal */
